@@ -1,0 +1,14 @@
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\bin\Debug\net8.0\BrokenSnake2.exe
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\bin\Debug\net8.0\BrokenSnake2.deps.json
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\bin\Debug\net8.0\BrokenSnake2.runtimeconfig.json
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\bin\Debug\net8.0\BrokenSnake2.dll
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\bin\Debug\net8.0\BrokenSnake2.pdb
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\obj\Debug\net8.0\BrokenSnake2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\obj\Debug\net8.0\BrokenSnake2.AssemblyInfoInputs.cache
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\obj\Debug\net8.0\BrokenSnake2.AssemblyInfo.cs
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\obj\Debug\net8.0\BrokenSnake2.csproj.CoreCompileInputs.cache
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\obj\Debug\net8.0\BrokenSnake2.dll
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\obj\Debug\net8.0\refint\BrokenSnake2.dll
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\obj\Debug\net8.0\BrokenSnake2.pdb
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\obj\Debug\net8.0\BrokenSnake2.genruntimeconfig.cache
+C:\Users\pavel\Documents\GitHub\BrokenSnake2\BrokenSnake2\BrokenSnake2\obj\Debug\net8.0\ref\BrokenSnake2.dll

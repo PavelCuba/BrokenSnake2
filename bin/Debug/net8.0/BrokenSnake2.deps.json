@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "BrokenSnake2/1.0.0": {
+        "runtime": {
+          "BrokenSnake2.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BrokenSnake2/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
