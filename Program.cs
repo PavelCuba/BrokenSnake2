@@ -34,7 +34,7 @@ namespace SnakeGame
 			{
 				Console.Clear();
 				DrawBorder();
-				Console.ForegroundColor = ConsoleColor.Green;
+				setForegroundColorToCyen();
 				score = checkIfBerryIsEaten(score, snakeHead, snakeBerry);
 
 				foreach (Pixel bodyPart in snakeBody)
@@ -44,7 +44,7 @@ namespace SnakeGame
 						gameOver = true;
 						break;
 					}
-
+					//TODO: checkIfHEadBodyCollision() a nekde dal vykresleni hada vertikalne
 					DrawPixel(bodyPart.xPos, bodyPart.yPos);
 
 				}
@@ -115,6 +115,12 @@ namespace SnakeGame
 			Console.SetCursorPosition(screenWidth / 5, screenHeight / 2);
 			Console.WriteLine("Game over, Score: " + (score - 5));
 			Console.SetCursorPosition(screenWidth / 5, screenHeight / 2 + 1);
+		}
+
+		private static void setForegroundColorToCyen()
+		{
+			
+			Console.ForegroundColor = ConsoleColor.Cyan;
 		}
 
 		private static int checkIfBerryIsEaten(int score, Pixel snakeHead, Berry snakeBerry)
