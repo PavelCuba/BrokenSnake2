@@ -15,7 +15,6 @@ namespace SnakeGame
 			bool gameOver = false;
 			string movement = "RIGHT";
 
-			prepareConsoleWindow(screenHeight, screenWidth);
 
 			Pixel snakeHead = new Pixel
 			{
@@ -23,24 +22,20 @@ namespace SnakeGame
 				yPos = screenHeight / 2,
 				color = ConsoleColor.Red
 			};
-
 			Berry snakeBerry = new Berry();
-			snakeBerry.GenerateNewBerry(screenWidth - 1, screenHeight - 1);
-
 			List<Pixel> snakeBody = new List<Pixel>();
 
+
+
+			prepareConsoleWindow(screenHeight, screenWidth);
+			snakeBerry.GenerateNewBerry(screenWidth - 1, screenHeight - 1);
 
 			while (!gameOver)
 			{
 				Console.Clear();
 				DrawBorder();
 				Console.ForegroundColor = ConsoleColor.Green;
-
-				if (snakeBerry.IsBerryEaten(snakeHead))
-				{
-					score++;
-					snakeBerry.GenerateNewBerry(screenWidth - 1, screenHeight - 1);
-				}
+				score = checkIfBerryIsEaten(score, snakeHead, snakeBerry);
 
 				foreach (Pixel bodyPart in snakeBody)
 				{
@@ -122,6 +117,17 @@ namespace SnakeGame
 			Console.SetCursorPosition(screenWidth / 5, screenHeight / 2 + 1);
 		}
 
+		private static int checkIfBerryIsEaten(int score, Pixel snakeHead, Berry snakeBerry)
+		{
+			if (snakeBerry.IsBerryEaten(snakeHead))
+			{
+				score++;
+				snakeBerry.GenerateNewBerry(screenWidth - 1, screenHeight - 1);
+			}
+
+			return score;
+		}
+
 		private static void prepareConsoleWindow(int screenHeight, int screenWidth)
 		{
 			Console.CursorVisible = false;
@@ -140,7 +146,7 @@ namespace SnakeGame
         public static void DrawPixel(int x, int y)
         {
             Console.SetCursorPosition(x, y);
-            Console.Write("■");
+            Console.Write("▄");
         }
 
 		public static void DrawVerticalPixel(int x, int y)
@@ -157,7 +163,7 @@ namespace SnakeGame
                 DrawPixel(i, screenHeight - 1);
             }
 
-			for (int i = 0; i < screenHeight; i++)
+			for (int i = 1; i < screenHeight; i++)
 			{
 				DrawVerticalPixel(0, i);
 				DrawVerticalPixel(screenWidth - 1, i);
