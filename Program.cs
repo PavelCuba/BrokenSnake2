@@ -5,129 +5,133 @@ namespace SnakeGame
 {
     class Program
     {
-        public const int MaxTimeToReact = 500;
-        public const int ScreenWidth = 32;
-        public const int ScreenHeight = 16;
+        public const int maxTimeToReact = 500;
+        public const int screenWidth = 32;
+        public const int screenHeight = 16;
 
         static void Main(string[] args)
-        {
-            Console.CursorVisible = false;
-            Console.SetWindowSize(32, 16);
-            Console.SetBufferSize(32, 16);
-            Console.WindowHeight = ScreenHeight;
-            Console.WindowWidth = ScreenWidth;
+		{
+			int score = 5;
+			bool gameOver = false;
+			string movement = "RIGHT";
 
-            Random random = new Random();
-            int score = 5;
-            bool gameOver = false;
+			prepareConsoleWindow(screenHeight, screenWidth);
 
-            Pixel snakeHead = new Pixel
-            {
-                xPos = ScreenWidth / 2,
-                yPos = ScreenHeight / 2,
-                Color = ConsoleColor.Red
-            };
+			Pixel snakeHead = new Pixel
+			{
+				xPos = screenWidth / 2,
+				yPos = screenHeight / 2,
+				color = ConsoleColor.Red
+			};
 
-            Berry snakeBerry = new Berry();
-            snakeBerry.GenerateNewBerry(ScreenWidth - 1, ScreenHeight - 1);
+			Berry snakeBerry = new Berry();
+			snakeBerry.GenerateNewBerry(screenWidth - 1, screenHeight - 1);
 
-            List<Pixel> snakeBody = new List<Pixel>();
-
-            string movement = "RIGHT";
-
-            while (!gameOver)
-            {
-                Console.Clear();
-                DrawBorder();
-                Console.ForegroundColor = ConsoleColor.Green;
-
-                if (snakeBerry.IsBerryEaten(snakeHead))
-                {
-                    score++;
-                    snakeBerry.GenerateNewBerry(ScreenWidth - 1, ScreenHeight - 1);
-                }
-
-                foreach (Pixel bodyPart in snakeBody)
-                {
-                    if (bodyPart.xPos == snakeHead.xPos && bodyPart.yPos == snakeHead.yPos)
-                    {
-                        gameOver = true;
-                        break;
-                    }
-
-                    DrawPixel(bodyPart.xPos, bodyPart.yPos);
-
-                }
-
-                if (gameOver)
-                    break;
-
-                Console.SetCursorPosition(snakeHead.xPos, snakeHead.yPos);
-                Console.ForegroundColor = snakeHead.Color;
-                Console.Write("■");
+			List<Pixel> snakeBody = new List<Pixel>();
 
 
-                Console.SetCursorPosition(snakeBerry.xPos, snakeBerry.yPos);
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write("■");
+			while (!gameOver)
+			{
+				Console.Clear();
+				DrawBorder();
+				Console.ForegroundColor = ConsoleColor.Green;
+
+				if (snakeBerry.IsBerryEaten(snakeHead))
+				{
+					score++;
+					snakeBerry.GenerateNewBerry(screenWidth - 1, screenHeight - 1);
+				}
+
+				foreach (Pixel bodyPart in snakeBody)
+				{
+					if (bodyPart.xPos == snakeHead.xPos && bodyPart.yPos == snakeHead.yPos)
+					{
+						gameOver = true;
+						break;
+					}
+
+					DrawPixel(bodyPart.xPos, bodyPart.yPos);
+
+				}
+
+				if (gameOver)
+					break;
+
+				Console.SetCursorPosition(snakeHead.xPos, snakeHead.yPos);
+				Console.ForegroundColor = snakeHead.color;
+				Console.Write("■");
 
 
-                if (snakeHead.xPos == ScreenWidth - 1 || snakeHead.xPos == 0 ||
-                    snakeHead.yPos == ScreenHeight - 1 || snakeHead.yPos == 0)
-                {
-                    gameOver = true;
-                    break;
-                }
+				Console.SetCursorPosition(snakeBerry.xPos, snakeBerry.yPos);
+				Console.ForegroundColor = ConsoleColor.Cyan;
+				Console.Write("■");
 
-                DateTime startTime = DateTime.Now;
 
-                while (true)
-                {
-                    DateTime currentTime = DateTime.Now;
-                    if (currentTime.Subtract(startTime).TotalMilliseconds > MaxTimeToReact)
-                        break;
+				if (snakeHead.xPos == screenWidth - 1 || snakeHead.xPos == 0 ||
+					snakeHead.yPos == screenHeight - 1 || snakeHead.yPos == 0)
+				{
+					gameOver = true;
+					break;
+				}
 
-                    if (Console.KeyAvailable)
-                    {
-                        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                        if (keyInfo.Key == ConsoleKey.UpArrow && movement != "DOWN")
-                            movement = "UP";
-                        if (keyInfo.Key == ConsoleKey.DownArrow && movement != "UP")
-                            movement = "DOWN";
-                        if (keyInfo.Key == ConsoleKey.LeftArrow && movement != "RIGHT")
-                            movement = "LEFT";
-                        if (keyInfo.Key == ConsoleKey.RightArrow && movement != "LEFT")
-                            movement = "RIGHT";
-                    }
-                }
+				DateTime startTime = DateTime.Now;
 
-                snakeBody.Add(new Pixel { xPos = snakeHead.xPos, yPos = snakeHead.yPos });
+				while (true)
+				{
+					DateTime currentTime = DateTime.Now;
+					if (currentTime.Subtract(startTime).TotalMilliseconds > maxTimeToReact)
+						break;
 
-                switch (movement)
-                {
-                    case "UP":
-                        snakeHead.yPos--;
-                        break;
-                    case "DOWN":
-                        snakeHead.yPos++;
-                        break;
-                    case "LEFT":
-                        snakeHead.xPos--;
-                        break;
-                    case "RIGHT":
-                        snakeHead.xPos++;
-                        break;
-                }
+					if (Console.KeyAvailable)
+					{
+						ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+						if (keyInfo.Key == ConsoleKey.UpArrow && movement != "DOWN")
+							movement = "UP";
+						if (keyInfo.Key == ConsoleKey.DownArrow && movement != "UP")
+							movement = "DOWN";
+						if (keyInfo.Key == ConsoleKey.LeftArrow && movement != "RIGHT")
+							movement = "LEFT";
+						if (keyInfo.Key == ConsoleKey.RightArrow && movement != "LEFT")
+							movement = "RIGHT";
+					}
+				}
 
-                checkSnakeLenght(score, snakeBody);
-            }
+				snakeBody.Add(new Pixel { xPos = snakeHead.xPos, yPos = snakeHead.yPos });
 
-            Console.SetCursorPosition(ScreenWidth / 5, ScreenHeight / 2);
-            Console.WriteLine("Game over, Score: " + (score - 5));
-            Console.SetCursorPosition(ScreenWidth / 5, ScreenHeight / 2 + 1);
-        }
+				switch (movement)
+				{
+					case "UP":
+						snakeHead.yPos--;
+						break;
+					case "DOWN":
+						snakeHead.yPos++;
+						break;
+					case "LEFT":
+						snakeHead.xPos--;
+						break;
+					case "RIGHT":
+						snakeHead.xPos++;
+						break;
+				}
 
-        private static void checkSnakeLenght(int score, List<Pixel> snakeBody)
+				checkSnakeLenght(score, snakeBody);
+			}
+
+			Console.SetCursorPosition(screenWidth / 5, screenHeight / 2);
+			Console.WriteLine("Game over, Score: " + (score - 5));
+			Console.SetCursorPosition(screenWidth / 5, screenHeight / 2 + 1);
+		}
+
+		private static void prepareConsoleWindow(int screenHeight, int screenWidth)
+		{
+			Console.CursorVisible = false;
+			Console.SetWindowSize(screenWidth, screenHeight);
+			Console.SetBufferSize(screenWidth, screenHeight);
+			Console.WindowHeight = screenHeight;
+			Console.WindowWidth = screenWidth;
+		}
+
+		private static void checkSnakeLenght(int score, List<Pixel> snakeBody)
         {
             if (snakeBody.Count > score)
                 snakeBody.RemoveAt(0);
@@ -139,20 +143,26 @@ namespace SnakeGame
             Console.Write("■");
         }
 
-        private static void DrawBorder()
+		public static void DrawVerticalPixel(int x, int y)
+		{
+			Console.SetCursorPosition(x, y);
+			Console.Write("█");
+		}
+
+		private static void DrawBorder()
         {
-            for (int i = 0; i < ScreenWidth; i++)
+            for (int i = 0; i < screenWidth; i++)
             {
                 DrawPixel(i, 0);
-                DrawPixel(i, ScreenHeight - 1);
+                DrawPixel(i, screenHeight - 1);
             }
 
-            for (int i = 0; i < ScreenHeight; i++)
-            {
-                DrawPixel(0, i);
-                DrawPixel(ScreenWidth - 1, i);
-            }
-        }
+			for (int i = 0; i < screenHeight; i++)
+			{
+				DrawVerticalPixel(0, i);
+				DrawVerticalPixel(screenWidth - 1, i);
+			}
+		}
     }
 
 
@@ -161,7 +171,7 @@ namespace SnakeGame
     {
         public int xPos { get; set; }
         public int yPos { get; set; }
-        public ConsoleColor Color { get; set; }
+        public ConsoleColor color { get; set; }
 
     }
 
